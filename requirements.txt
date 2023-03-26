@@ -1,5 +1,4 @@
 dash==2.7.0
-dash-tools
 dash-bootstrap-components==1.2.1
 dash-core-components==2.0.0
 dash-cytoscape==0.3.0
