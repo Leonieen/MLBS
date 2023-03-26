@@ -5,13 +5,9 @@ dash-cytoscape==0.3.0
 dash-html-components==2.0.0
 dash-table==5.0.0
 dash-tools==1.8.2
-Flask==2.2.2
-Flask-Compress==1.12
 folium==0.13.0
 gunicorn==20.1.0
-leafmap==0.15.0
 numpy==1.21.6
 pandas==1.3.5
-Pillow==9.3.0
 plotly==5.10.0
 plotly-express==0.4.1
