@@ -12,6 +12,7 @@ df_merge_Date = pd.read_csv(df_merge_Date_data)
 
 
 app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.SPACELAB])
+server = app.server
 
 blackbold = {'color': 'black', 'font-weight': 'bold'}
 # styling the sidebar
