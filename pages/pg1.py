@@ -15,6 +15,7 @@ blackbold = {'color': 'black', 'font-weight': 'bold'}
 
 # page 1 data
 mapbox_access_token = ("pk.eyJ1IjoiZ2VvbmllIiwiYSI6ImNsM210Ymc3ODA4NGozaWw4aG1hNDJtMW4ifQ.mmjDtqmcSpEZM2JyXe9Q8g")
+mapbox_access_token2 = ("pk.eyJ1IjoiZ2VvbmllIiwiYSI6ImNsM210Ymc3ODA4NGozaWw4aG1hNDJtMW4ifQ.mmjDtqmcSpEZM2JyXe9Q8g")
 
 #load data
 url = (
@@ -661,12 +662,11 @@ layout = html.Div(
                          value=12244863,
                          style={'padding-left': '80px', 'padding-right': '20px'},# "display": "inline", 'color': 'black'},
                          searchable=True, ),
-            dbc.Spinner(
-                children=[dcc.Graph(id='map_movement_id', config={'displayModeBar': False, 'scrollZoom': True},
-                                    style={'background': '#ffffff', 'padding-bottom': '2px',
-                                           'padding-left': '2px',
-                                           'height': '100vh', 'width': '150vh'}
-                                    )], size="lg", color="primary", type="border", fullscreen=False, ),
+            dbc.Spinner(children=[dcc.Graph(id='map_movement_id', config={'displayModeBar': False, 'scrollZoom': True},
+                                            style={'background': '#ffffff', 'padding-bottom': '2px',
+                                                   'padding-left': '20px',
+                                                   'height': '100vh', 'width': '150vh'}
+                                            )], size="lg", color="primary", type="border", fullscreen=False, ),
             dbc.Spinner(
                 children=[dcc.Graph(id='map2_movement_id', config={'displayModeBar': False, 'scrollZoom': True},
                                     style={'background': '#ffffff', 'padding-bottom': '2px',
@@ -846,15 +846,18 @@ def maps_animated_fct(country_value, month_value, weekday_value, hour_value):
 
 def maps_user_fct(user_id):
     user = df_merge_Date.loc[df_merge_Date['pos_usr_id'] == user_id]
-    #px.set_mapbox_access_token(open("https://raw.githubusercontent.com/Leonieen/MLBS/main/access.mapbox_token").read())
-    px.set_mapbox_access_token('pk.eyJ1IjoiZ2VvbmllIiwiYSI6ImNsM210Ymc3ODA4NGozaWw4aG1hNDJtMW4ifQ.mmjDtqmcSpEZM2JyXe9Q8g')
+    px.set_mapbox_access_token(open("access.mapbox_token").read())
+    #px.set_mapbox_access_token('pk.eyJ1IjoiZ2VvbmllIiwiYSI6ImNsM210Ymc3ODA4NGozaWw4aG1hNDJtMW4ifQ.mmjDtqmcSpEZM2JyXe9Q8g')
     user_map = [go.Scattermapbox(
-        mode="markers+lines",
-        lat=user.lat.tolist(),
-        lon=user.lon.tolist(),
-        hovertext=user.call_time.tolist(),
-        marker={'color': "red",
-                "size": 10},
+        lon=user['lon'],
+        lat=user['lat'],
+        mode='markers+lines',
+        marker={'color': user['color']},
+        unselected={'marker': {'opacity': 1}},
+        selected={'marker': {'opacity': 0.5, 'size': 25}},
+        hoverinfo='text',
+        hovertext=user['call_time'],
+        # customdata=df_sub['website']
     )]
     # Return figure
     return {
